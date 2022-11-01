@@ -6,11 +6,11 @@
   <h1>Welcome to IM!</h1>
 
   <div class="btn">
-    <Button message={"Create Room"} to="/new" />
+    <Button message={"Log in"} to="/log-in" />
   </div>
 
   <div class="btn">
-    <Button message={"Access Existing Room"} to="/room" />
+    <Button message={"Create Account"} to="/sign-in" />
   </div>
 </div>
 
