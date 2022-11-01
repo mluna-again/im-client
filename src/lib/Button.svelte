@@ -1,15 +1,37 @@
 <script>
+  import { Link } from "svelte-routing";
+
   export let message;
-  export let reverse = false;
+  export let white = false;
+  export let to = undefined;
+  export let onClick = undefined;
 </script>
 
-<button>
-  {#each message.split("") as letter}
-    <span>{letter}</span>
-  {/each}
-</button>
+{#if to}
+  <Link to={to}>
+    <button class:white={white}>
+      {#each message.split("") as letter}
+        <span>{letter}</span>
+      {/each}
+    </button>
+  </Link>
+{:else}
+  <button class:white={white} on:click={onClick}>
+    {#each message.split("") as letter}
+      <span>{letter}</span>
+    {/each}
+  </button>
+{/if}
 
 <style>
+  button.white {
+    background-color: white;
+  }
+
+  button.white span {
+    color: black;
+  }
+
   button span {
     display: inline-block;
     margin: 0 3px;
