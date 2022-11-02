@@ -1,7 +1,6 @@
 <script>
   export let reverse = false;
   export let password = false;
-  export let value = "";
   export let onChange = undefined;
   export let validate = undefined;
 

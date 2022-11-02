@@ -40,8 +40,8 @@
 
   <h1>Sign in</h1>
 
-  <Input value={username} onChange={setUsername} validate={validateUsername} />
-  <Input value={password} onChange={setPassword} validate={validatePassword} reverse password />
+  <Input onChange={setUsername} validate={validateUsername} />
+  <Input onChange={setPassword} validate={validatePassword} reverse password />
 
   <div class="btn">
     <Button message="Create Account" onClick={submitHandler} />
