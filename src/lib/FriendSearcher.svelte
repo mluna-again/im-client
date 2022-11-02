@@ -34,7 +34,7 @@
 </script>
 
 <div>
-	<Button message="Add friends" onClick={() => (overlayVisible = true)} />
+	<Button message="Add friends" onClick={() => (overlayVisible = true)} size="sm" />
 
 	{#if overlayVisible}
 		<div class="overlay" on:click={() => (overlayVisible = false)}>

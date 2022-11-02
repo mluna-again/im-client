@@ -30,8 +30,10 @@
 				<Logo />
 			</div>
 
-			<h1>{user.username}</h1>
-			<FriendSearcher />
+      <div class="header">
+      <h1>{user.username}</h1>
+        <FriendSearcher />
+      </div>
 		</div>
 	</div>
 {:else}
@@ -68,4 +70,9 @@
 		top: 0;
 		left: 0;
 	}
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+  }
 </style>
