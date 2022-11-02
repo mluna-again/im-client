@@ -5,20 +5,20 @@
 	import Input from '../lib/Input.svelte';
 	import Button from '../lib/Button.svelte';
 
-  let loading = false;
+	let loading = false;
 
-  const checkIfUserIsLogged = async () => {
-    loading = true;
-    const serverUrl = `${import.meta.env.VITE_SERVER_URL}/users/logged`
-    const response = await fetch(serverUrl, { credentials: 'include'});
-    if (!response.ok) {
-      loading = false;
-      return;
-    }
+	const checkIfUserIsLogged = async () => {
+		loading = true;
+		const serverUrl = `${import.meta.env.VITE_SERVER_URL}/users/logged`;
+		const response = await fetch(serverUrl, { credentials: 'include' });
+		if (!response.ok) {
+			loading = false;
+			return;
+		}
 
-    navigate('/app', { replace: true });
-  };
-  checkIfUserIsLogged();
+		navigate('/app', { replace: true });
+	};
+	checkIfUserIsLogged();
 
 	let username = '';
 	let password = '';
@@ -53,11 +53,11 @@
 				password,
 			},
 		};
-    loading = true;
+		loading = true;
 		const response = await fetch(serverUrl, {
 			method: 'POST',
 			body: JSON.stringify(data),
-      credentials: 'include',
+			credentials: 'include',
 			headers: {
 				Accept: 'application/json',
 				'Content-Type': 'application/json',
@@ -66,7 +66,7 @@
 
 		if (!response.ok) {
 			error = `server says: ${response.statusText}`;
-      loading = false;
+			loading = false;
 			return;
 		}
 
@@ -95,7 +95,7 @@
 		/>
 
 		<div class="btn">
-			<Button message="{loading ? 'Loading...' : 'Log in'}" />
+			<Button message={loading ? 'Loading...' : 'Log in'} />
 		</div>
 	</form>
 

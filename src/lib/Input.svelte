@@ -23,12 +23,8 @@
 
 <div class="container" class:reverse>
 	<span class="placeholder">{placeholder}</span>
-
-	{#if error && reverse}
-		<span class="err">{error}</span>
-	{/if}
 	<input type={password ? 'password' : 'text'} on:input={changeHandler} />
-	{#if error && !reverse}
+	{#if error}
 		<span class="err">{error}</span>
 	{/if}
 </div>
@@ -72,7 +68,7 @@
 
 	input {
 		height: 35px;
-		width: min-content;
+		width: 100%;
 		background-color: black;
 		border: none;
 		transform: skew(-20deg);

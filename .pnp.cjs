@@ -34,6 +34,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./",\
           "packageDependencies": [\
             ["@sveltejs/vite-plugin-svelte", "virtual:2db3978030c0a43973ad9067c21d65e2b09f8f9ee6ce7840ede9a6a66d57b549fe67d3023ef9d0418b1dbdad1aa542f589f4a6cd66fcc983a4e9cfcf697782b6#npm:1.1.0"],\
+            ["lodash.debounce", "npm:4.0.8"],\
             ["prettier", "npm:2.7.1"],\
             ["prettier-plugin-svelte", "virtual:2db3978030c0a43973ad9067c21d65e2b09f8f9ee6ce7840ede9a6a66d57b549fe67d3023ef9d0418b1dbdad1aa542f589f4a6cd66fcc983a4e9cfcf697782b6#npm:2.8.0"],\
             ["svelte", "npm:3.52.0"],\
@@ -782,6 +783,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["im", "workspace:."],\
             ["@sveltejs/vite-plugin-svelte", "virtual:2db3978030c0a43973ad9067c21d65e2b09f8f9ee6ce7840ede9a6a66d57b549fe67d3023ef9d0418b1dbdad1aa542f589f4a6cd66fcc983a4e9cfcf697782b6#npm:1.1.0"],\
+            ["lodash.debounce", "npm:4.0.8"],\
             ["prettier", "npm:2.7.1"],\
             ["prettier-plugin-svelte", "virtual:2db3978030c0a43973ad9067c21d65e2b09f8f9ee6ce7840ede9a6a66d57b549fe67d3023ef9d0418b1dbdad1aa542f589f4a6cd66fcc983a4e9cfcf697782b6#npm:2.8.0"],\
             ["svelte", "npm:3.52.0"],\
@@ -889,6 +891,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/kleur-npm-4.1.5-46b6135f41-1dc476e327.zip/node_modules/kleur/",\
           "packageDependencies": [\
             ["kleur", "npm:4.1.5"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["lodash.debounce", [\
+        ["npm:4.0.8", {\
+          "packageLocation": "./.yarn/cache/lodash.debounce-npm-4.0.8-f1d6e09799-a3f527d22c.zip/node_modules/lodash.debounce/",\
+          "packageDependencies": [\
+            ["lodash.debounce", "npm:4.0.8"]\
           ],\
           "linkType": "HARD"\
         }]\

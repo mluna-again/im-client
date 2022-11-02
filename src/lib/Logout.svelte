@@ -1,15 +1,15 @@
 <script>
 	import { navigate } from 'svelte-routing';
 
-  const logoutHandler = async () => {
+	const logoutHandler = async () => {
 		const serverUrl = `${import.meta.env.VITE_SERVER_URL}/log-out`;
 		await fetch(serverUrl, {
 			method: 'DELETE',
-      credentials: 'include'
+			credentials: 'include',
 		});
 
 		navigate('/', { replace: true });
-  };
+	};
 </script>
 
 <button on:click={logoutHandler}>LOG OUT</button>
