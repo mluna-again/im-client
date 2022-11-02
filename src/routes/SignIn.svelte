@@ -63,8 +63,13 @@
 	<h1>Sign in</h1>
 
 	<form on:submit|preventDefault={submitHandler}>
-		<Input onChange={setUsername} validate={validateUsername} />
 		<Input
+			placeholder="username"
+			onChange={setUsername}
+			validate={validateUsername}
+		/>
+		<Input
+			placeholder="password"
 			onChange={setPassword}
 			validate={validatePassword}
 			reverse

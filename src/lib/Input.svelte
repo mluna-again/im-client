@@ -3,6 +3,7 @@
 	export let password = false;
 	export let onChange = undefined;
 	export let validate = undefined;
+	export let placeholder = '';
 
 	let error = null;
 
@@ -21,6 +22,8 @@
 </script>
 
 <div class="container" class:reverse>
+	<span class="placeholder">{placeholder}</span>
+
 	{#if error && reverse}
 		<span class="err">{error}</span>
 	{/if}
@@ -51,7 +54,8 @@
 	}
 
 	.container {
-		margin: 10px 0;
+		position: relative;
+		margin: 25px 0;
 		background-color: white;
 		padding: 15px;
 		transform: skew(20deg);
@@ -80,5 +84,18 @@
 
 	input:focus {
 		outline: none;
+	}
+
+	.placeholder {
+		position: absolute;
+		top: -20%;
+		left: -5%;
+		background-color: black;
+		color: white;
+	}
+
+	.reverse .placeholder {
+		background-color: white;
+		color: black;
 	}
 </style>
