@@ -41,6 +41,7 @@
 		const response = await fetch(serverUrl, {
 			method: 'POST',
 			body: JSON.stringify(data),
+      credentials: 'include',
 			headers: {
 				Accept: 'application/json',
 				'Content-Type': 'application/json',
