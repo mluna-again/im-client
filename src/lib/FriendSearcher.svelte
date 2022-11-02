@@ -30,11 +30,14 @@
 	fetchUsers();
 
 	let overlayVisible = false;
-	$: console.log(overlayVisible);
 </script>
 
 <div>
-	<Button message="Add friends" onClick={() => (overlayVisible = true)} size="sm" />
+	<Button
+		message="Add friends"
+		onClick={() => (overlayVisible = true)}
+		size="sm"
+	/>
 
 	{#if overlayVisible}
 		<div class="overlay" on:click={() => (overlayVisible = false)}>
