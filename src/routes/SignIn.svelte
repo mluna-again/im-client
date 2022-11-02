@@ -1,5 +1,6 @@
 <script>
 	import { fly } from 'svelte/transition';
+	import { navigate } from 'svelte-routing';
 	import GoBack from '../lib/GoBack.svelte';
 	import Input from '../lib/Input.svelte';
 	import Button from '../lib/Button.svelte';
@@ -45,7 +46,13 @@
 				'Content-Type': 'application/json',
 			},
 		});
-		console.log(response);
+
+		if (!response.ok) {
+			error = `server says: ${response.statusText}`;
+			return;
+		}
+
+		navigate('/app', { replace: true });
 		error = null;
 	};
 </script>
