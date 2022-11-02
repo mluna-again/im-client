@@ -3,11 +3,13 @@
 	import Home from './routes/Home.svelte';
 	import SignIn from './routes/SignIn.svelte';
 	import Login from './routes/Login.svelte';
+	import ChatApp from './routes/ChatApp.svelte';
 </script>
 
 <main>
 	<Router>
 		<Route path="/"><Home /></Route>
+		<Route path="/app"><ChatApp /></Route>
 		<Route path="/log-in"><Login /></Route>
 		<Route path="/sign-in"><SignIn /></Route>
 	</Router>
