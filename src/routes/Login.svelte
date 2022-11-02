@@ -4,6 +4,57 @@
 	import GoBack from '../lib/GoBack.svelte';
 	import Input from '../lib/Input.svelte';
 	import Button from '../lib/Button.svelte';
+
+	let username = '';
+	let password = '';
+	const setUsername = (text) => (username = text);
+	const setPassword = (text) => (password = text);
+
+	const validateUsername = (username) => {
+		if (username.length < 4) return 'too short';
+		if (username.length > 15) return 'too long';
+
+		return null;
+	};
+
+	const validatePassword = (password) => {
+		if (password.length < 6) return 'too short';
+		if (password.length > 72) return 'too long';
+
+		return null;
+	};
+
+	let error = null;
+	const submitHandler = async () => {
+		if (!username || !password) {
+			error = 'please check your data';
+			return;
+		}
+
+		const serverUrl = `${import.meta.env.VITE_SERVER_URL}/log-in`;
+		const data = {
+			user: {
+				username,
+				password,
+			},
+		};
+		const response = await fetch(serverUrl, {
+			method: 'POST',
+			body: JSON.stringify(data),
+			headers: {
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+			},
+		});
+
+		if (!response.ok) {
+			error = `server says: ${response.statusText}`;
+			return;
+		}
+
+		navigate('/app', { replace: true });
+		error = null;
+	};
 </script>
 
 <div class="container" in:fly={{ duration: 300, y: 200 }}>
@@ -12,13 +63,27 @@
 	<h1>Log in</h1>
 
 	<form on:submit|preventDefault={submitHandler}>
-		<Input placeholder="username" />
-		<Input placeholder="password" reverse />
+		<Input
+			placeholder="username"
+			validate={validateUsername}
+			onChange={setUsername}
+		/>
+		<Input
+			placeholder="password"
+			validate={validatePassword}
+			onChange={setPassword}
+			password
+			reverse
+		/>
 
 		<div class="btn">
 			<Button message="Log in" />
 		</div>
 	</form>
+
+	{#if error}
+		<p class="err">{error}</p>
+	{/if}
 </div>
 
 <style>
@@ -38,5 +103,10 @@
 		margin-top: 2rem;
 		display: flex;
 		justify-content: center;
+	}
+
+	.err {
+		margin-top: 2rem;
+		font-size: 3rem;
 	}
 </style>
