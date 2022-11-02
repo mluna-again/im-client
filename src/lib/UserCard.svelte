@@ -2,6 +2,26 @@
 	import Button from './Button.svelte';
 
 	export let user;
+
+	let loading = false;
+	const addFriendHandler = async () => {
+		loading = true;
+
+		const serverUrl = `${import.meta.env.VITE_SERVER_URL}/friends/request`;
+		const data = { user_id: user.id };
+		const response = await fetch(serverUrl, {
+			method: 'POST',
+			body: JSON.stringify(data),
+			credentials: 'include',
+			headers: {
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+			},
+		});
+
+		loading = false;
+		user = { ...user, invitation_sent: true };
+	};
 </script>
 
 <div class="container">
@@ -10,10 +30,12 @@
 	</h1>
 
 	<div>
-		{#if user.invitation_sent}
+		{#if loading}
+			<Button disabled message="..." size="sm" />
+		{:else if user.invitation_sent}
 			<Button disabled message="request sent" size="sm" />
 		{:else}
-			<Button message="add friend" size="sm" />
+			<Button message="add friend" size="sm" onClick={addFriendHandler} />
 		{/if}
 	</div>
 </div>
