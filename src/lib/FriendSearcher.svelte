@@ -17,7 +17,7 @@
     userList = data;
   };
 
-  $: debouncedFetch = debounce(fetchUsers, 500);
+  let debouncedFetch = debounce(fetchUsers, 500);
   const changeHandler = q => {
     query = q;
     debouncedFetch();
