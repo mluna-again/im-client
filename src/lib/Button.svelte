@@ -5,6 +5,8 @@
 	export let white = false;
 	export let to = undefined;
 	export let onClick = undefined;
+	export let size = 'md';
+	export let disabled = false;
 </script>
 
 {#if to}
@@ -16,7 +18,13 @@
 		</button>
 	</Link>
 {:else}
-	<button class:white on:click={onClick}>
+	<button
+		class:white
+		on:click={onClick}
+		class:small={size === 'sm'}
+		class:disabled
+		{disabled}
+	>
 		{#each message.split('') as letter}
 			<span>{letter}</span>
 		{/each}
@@ -63,6 +71,17 @@
 		transform: skew(3deg, 3deg);
 		transition: all 0.1s ease;
 		cursor: pointer;
+	}
+
+	button.disabled {
+		color: black;
+		background-color: transparent;
+		cursor: not-allowed;
+	}
+
+	button.small {
+		font-size: 1.4rem;
+		padding: 0.3rem;
 	}
 
 	button:hover {
