@@ -24,13 +24,24 @@
   };
 
   let error = null;
-  const submitHandler = () => {
+  const submitHandler = async () => {
     if (!username || !password) {
       error = "please check your data";
       return;
     }
 
-    console.log({password, username});
+    const serverUrl = `${import.meta.env.VITE_SERVER_URL}/users`;
+    const data = {
+      user: {
+        username,
+        password
+      }
+    }
+    const response = await fetch(serverUrl, { method: "POST", body: JSON.stringify(data),headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },});
+    console.log(response)
     error = null;
   };
 </script>
@@ -40,12 +51,15 @@
 
   <h1>Sign in</h1>
 
-  <Input onChange={setUsername} validate={validateUsername} />
-  <Input onChange={setPassword} validate={validatePassword} reverse password />
+  <form on:submit|preventDefault={submitHandler}>
+    <Input onChange={setUsername} validate={validateUsername} />
+    <Input onChange={setPassword} validate={validatePassword} reverse password />
 
-  <div class="btn">
-    <Button message="Create Account" onClick={submitHandler} />
-  </div>
+
+    <div class="btn">
+      <Button message="Create Account" />
+    </div>
+  </form>
 
   {#if error}
     <p class="err">{error}</p>
@@ -69,6 +83,8 @@
 
   .btn {
     margin-top: 2rem;
+    display: flex;
+    justify-content: center;
   }
 
   .err {
