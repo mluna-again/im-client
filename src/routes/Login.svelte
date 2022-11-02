@@ -5,6 +5,21 @@
 	import Input from '../lib/Input.svelte';
 	import Button from '../lib/Button.svelte';
 
+  let loading = false;
+
+  const checkIfUserIsLogged = async () => {
+    loading = true;
+    const serverUrl = `${import.meta.env.VITE_SERVER_URL}/users/logged`
+    const response = await fetch(serverUrl, { credentials: 'include'});
+    if (!response.ok) {
+      loading = false;
+      return;
+    }
+
+    navigate('/app', { replace: true });
+  };
+  checkIfUserIsLogged();
+
 	let username = '';
 	let password = '';
 	const setUsername = (text) => (username = text);
@@ -38,6 +53,7 @@
 				password,
 			},
 		};
+    loading = true;
 		const response = await fetch(serverUrl, {
 			method: 'POST',
 			body: JSON.stringify(data),
@@ -50,6 +66,7 @@
 
 		if (!response.ok) {
 			error = `server says: ${response.statusText}`;
+      loading = false;
 			return;
 		}
 
@@ -78,7 +95,7 @@
 		/>
 
 		<div class="btn">
-			<Button message="Log in" />
+			<Button message="{loading ? 'Loading...' : 'Log in'}" />
 		</div>
 	</form>
 
