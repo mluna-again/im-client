@@ -1,12 +1,46 @@
 <script>
   export let reverse = false;
+  export let password = false;
+  export let value = "";
+  export let onChange = undefined;
+  export let validate = undefined;
+
+  let error = null;
+
+  const changeHandler = event => {
+    const text = event.target.value;
+    const validationError = validate && validate(text);
+    if (validationError) {
+      onChange("");
+      error = validationError;
+      return;
+    }
+
+    error = null;
+    onChange(text);
+  };
+
 </script>
 
 <div class="container" class:reverse>
-  <input type="text">
+  {#if error && reverse}
+    <span class="err">{error}</span>
+  {/if}
+  <input type="{password ? 'password' : 'text'}" on:input={changeHandler}>
+  {#if error && !reverse}
+    <span class="err">{error}</span>
+  {/if}
 </div>
 
 <style>
+  .err {
+    color: black;
+  }
+
+  .reverse .err {
+    color: white;
+  }
+
   .container.reverse {
     background-color: black;
     transform: skew(-20deg);
