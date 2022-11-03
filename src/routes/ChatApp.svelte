@@ -22,8 +22,13 @@
 			user = { ...user, friend_requests: [...user.friend_requests, request] };
 		});
 
-		channel.on('remove_request', ({user_to_remove}) => {
-			user = { ...user, friend_requests: user.friend_requests.filter(req => req.id === user_to_remove) };
+		channel.on('remove_request', ({ user_to_remove }) => {
+			user = {
+				...user,
+				friend_requests: user.friend_requests.filter(
+					(req) => req.id === user_to_remove
+				),
+			};
 		});
 	};
 

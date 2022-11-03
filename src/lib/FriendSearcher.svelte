@@ -5,7 +5,7 @@
 	import UserCard from './UserCard.svelte';
 	import Button from './Button.svelte';
 
-  export let user;
+	export let user;
 	let userList = [];
 
 	let query = '';

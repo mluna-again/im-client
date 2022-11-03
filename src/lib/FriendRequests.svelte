@@ -1,6 +1,7 @@
 <script>
 	import { fly, fade } from 'svelte/transition';
 	import Button from './Button.svelte';
+	import RequestCard from './RequestCard.svelte';
 
 	export let user;
 	$: counter = user?.friend_requests?.length;
@@ -39,8 +40,7 @@
 					transition:fly={{ y: 300, duration: 300, delay: 50 }}
 					class="friend"
 				>
-					<span>{request.username} -></span>
-					<Button red message="accept request" size="sm" />
+					<RequestCard {request} />
 				</div>
 			{/each}
 		</div>
@@ -106,11 +106,6 @@
 
 	.list h1 {
 		margin-bottom: 3rem;
-	}
-
-	.list span {
-		font-size: 5rem;
-		margin-right: 3rem;
 	}
 
 	.list .friend {
