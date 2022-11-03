@@ -32,16 +32,23 @@
 	};
 </script>
 
-<span>{request.username} -></span>
-{#if loading}
-	<Button red message="..." size="sm" />
-{:else if accepted}
-	<Button white message="already friends" size="sm" />
-{:else if error}
-	<Button message={error} size="sm" />
-{:else}
-	<Button red message="accept request" size="sm" onClick={acceptUserHandler} />
-{/if}
+<div>
+	<span>{request.username} -></span>
+	{#if loading}
+		<Button red message="..." size="sm" />
+	{:else if accepted}
+		<Button white message="already friends" size="sm" />
+	{:else if error}
+		<Button message={error} size="sm" />
+	{:else}
+		<Button
+			red
+			message="accept request"
+			size="sm"
+			onClick={acceptUserHandler}
+		/>
+	{/if}
+</div>
 
 <style>
 	span {

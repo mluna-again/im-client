@@ -23,6 +23,10 @@
 			user = { ...user, friend_requests: [...user.friend_requests, request] };
 		});
 
+		channel.on('new_friend', (friend) => {
+			user = { ...user, friends: [...user.friends, friend] };
+		});
+
 		channel.on('remove_request', ({ user_to_remove }) => {
 			user = {
 				...user,
@@ -63,12 +67,11 @@
 				<div class="user">
 					<FriendRequests {user} />
 					<h1>{user.username}</h1>
-
 				</div>
 
 				<FriendSearcher {user} />
 			</div>
-      <FriendList {user} />
+			<FriendList {user} />
 		</div>
 	</div>
 {:else}

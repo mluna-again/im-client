@@ -54,6 +54,7 @@
 
 <style>
 	.overlay {
+		z-index: 10;
 		height: 100vh;
 		width: 100vw;
 		position: fixed;

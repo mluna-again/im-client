@@ -99,7 +99,7 @@
 		flex-direction: column;
 		align-items: center;
 		padding-top: 3rem;
-		z-index: 3;
+		z-index: 10;
 	}
 
 	.list h1 {
