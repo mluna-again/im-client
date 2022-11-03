@@ -45,9 +45,13 @@
 		<div class="overlay" on:click={() => (overlayVisible = false)}>
 			<div on:click|stopPropagation transition:fly={{ y: 300, duration: 300 }}>
 				<Input placeholder="Search friends" onChange={changeHandler} />
-				{#each userList as user}
-					<UserCard {user} />
-				{/each}
+				<ul class="list">
+					{#each userList as user}
+						<li>
+							<UserCard {user} />
+						</li>
+					{/each}
+				</ul>
 			</div>
 		</div>
 	{/if}
@@ -61,8 +65,27 @@
 		position: fixed;
 		top: 0;
 		left: 0;
-		padding: 5rem 9rem;
-		background-color: rgba(0, 0, 0, 0.3);
+		background-color: rgba(0, 0, 0, 0.7);
+		padding: 5rem;
+		padding-top: 2rem;
+	}
+
+	.overlay > div {
+		height: 100%;
+		width: 100%;
+	}
+
+	.list ul::-webkit-scrollbar {
+		display: none;
+	}
+	.list {
+		scrollbar-width: none;
+		height: 100%;
+		width: 100%;
+		padding: 0 1rem;
+		padding-bottom: 4rem;
+		overflow-y: scroll;
+		list-style: none;
 	}
 
 	@media (max-width: 650px) {
