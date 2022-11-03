@@ -35,6 +35,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["@sveltejs/vite-plugin-svelte", "virtual:2db3978030c0a43973ad9067c21d65e2b09f8f9ee6ce7840ede9a6a66d57b549fe67d3023ef9d0418b1dbdad1aa542f589f4a6cd66fcc983a4e9cfcf697782b6#npm:1.1.0"],\
             ["lodash.debounce", "npm:4.0.8"],\
+            ["phoenix", "npm:1.6.15"],\
             ["prettier", "npm:2.7.1"],\
             ["prettier-plugin-svelte", "virtual:2db3978030c0a43973ad9067c21d65e2b09f8f9ee6ce7840ede9a6a66d57b549fe67d3023ef9d0418b1dbdad1aa542f589f4a6cd66fcc983a4e9cfcf697782b6#npm:2.8.0"],\
             ["svelte", "npm:3.52.0"],\
@@ -784,6 +785,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["im", "workspace:."],\
             ["@sveltejs/vite-plugin-svelte", "virtual:2db3978030c0a43973ad9067c21d65e2b09f8f9ee6ce7840ede9a6a66d57b549fe67d3023ef9d0418b1dbdad1aa542f589f4a6cd66fcc983a4e9cfcf697782b6#npm:1.1.0"],\
             ["lodash.debounce", "npm:4.0.8"],\
+            ["phoenix", "npm:1.6.15"],\
             ["prettier", "npm:2.7.1"],\
             ["prettier-plugin-svelte", "virtual:2db3978030c0a43973ad9067c21d65e2b09f8f9ee6ce7840ede9a6a66d57b549fe67d3023ef9d0418b1dbdad1aa542f589f4a6cd66fcc983a4e9cfcf697782b6#npm:2.8.0"],\
             ["svelte", "npm:3.52.0"],\
@@ -1199,6 +1201,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/path-parse-npm-1.0.7-09564527b7-49abf3d811.zip/node_modules/path-parse/",\
           "packageDependencies": [\
             ["path-parse", "npm:1.0.7"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["phoenix", [\
+        ["npm:1.6.15", {\
+          "packageLocation": "./.yarn/cache/phoenix-npm-1.6.15-c13778d7f1-c84c5e06ce.zip/node_modules/phoenix/",\
+          "packageDependencies": [\
+            ["phoenix", "npm:1.6.15"]\
           ],\
           "linkType": "HARD"\
         }]\

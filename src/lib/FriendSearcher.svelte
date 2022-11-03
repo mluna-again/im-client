@@ -30,8 +30,6 @@
 	fetchUsers();
 
 	let overlayVisible = false;
-
-	$: console.log(userList);
 </script>
 
 <div>

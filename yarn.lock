@@ -670,6 +670,7 @@ __metadata:
   dependencies:
     "@sveltejs/vite-plugin-svelte": ^1.1.0
     lodash.debounce: ^4.0.8
+    phoenix: ^1.6.15
     prettier: ^2.7.1
     prettier-plugin-svelte: ^2.8.0
     svelte: ^3.52.0
@@ -1044,6 +1045,13 @@ __metadata:
   version: 1.0.7
   resolution: "path-parse@npm:1.0.7"
   checksum: 49abf3d81115642938a8700ec580da6e830dde670be21893c62f4e10bd7dd4c3742ddc603fe24f898cba7eb0c6bc1777f8d9ac14185d34540c6d4d80cd9cae8a
+  languageName: node
+  linkType: hard
+
+"phoenix@npm:^1.6.15":
+  version: 1.6.15
+  resolution: "phoenix@npm:1.6.15"
+  checksum: c84c5e06ce55e9357ba0d10870f373b9a67b05d20dccdf8925d7e55f4465afd155ca6cde38725325374a2f0181197aff1ebc11c62f2255e1833494c7a3c74107
   languageName: node
   linkType: hard
 

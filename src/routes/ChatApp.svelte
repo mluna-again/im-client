@@ -1,14 +1,29 @@
 <script>
 	import { navigate } from 'svelte-routing';
 	import { fly } from 'svelte/transition';
+	import { Socket } from 'phoenix';
 	import Logo from '../lib/Logo.svelte';
 	import Logout from '../lib/Logout.svelte';
 	import FriendSearcher from '../lib/FriendSearcher.svelte';
 	import FriendRequests from '../lib/FriendRequests.svelte';
 
 	let user = null;
+	let socket = null;
+	let channel = null;
+
+	const connectSocket = () => {
+		socket = new Socket(`${import.meta.env.VITE_SERVER_WS}/socket`, {
+			params: { token: window.localStorage.getItem('t') },
+		});
+		socket.connect();
+		channel = socket.channel('messages:' + user.id);
+		channel.join().receive('ok', () => console.log('joined channel'));
+		channel.on('new_request', () => {
+			user = { ...user, requests: user.requests + 1 };
+		});
+	};
+
 	const fetchUser = async () => {
-		console.log('fetching user...');
 		const serverUrl = `${import.meta.env.VITE_SERVER_URL}/users/logged`;
 		const response = await fetch(serverUrl, { credentials: 'include' });
 		if (!response.ok && response.status === 401) {
@@ -17,7 +32,9 @@
 		}
 		const data = await response.json();
 		user = data;
+		connectSocket(data);
 	};
+
 	fetchUser();
 </script>
 
