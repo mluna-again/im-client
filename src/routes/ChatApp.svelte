@@ -17,7 +17,7 @@
 			params: { token: window.localStorage.getItem('t') },
 		});
 		socket.connect();
-		channel = socket.channel('messages:' + user.id);
+		channel = socket.channel('requests:' + user.id);
 		channel.join().receive('ok', () => console.log('joined channel'));
 		channel.on('new_request', (request) => {
 			user = { ...user, friend_requests: [...user.friend_requests, request] };
