@@ -18,8 +18,12 @@
 		socket.connect();
 		channel = socket.channel('messages:' + user.id);
 		channel.join().receive('ok', () => console.log('joined channel'));
-		channel.on('new_request', () => {
-			user = { ...user, requests: user.requests + 1 };
+		channel.on('new_request', (request) => {
+			user = { ...user, friend_requests: [...user.friend_requests, request] };
+		});
+
+		channel.on('remove_request', ({user_to_remove}) => {
+			user = { ...user, friend_requests: user.friend_requests.filter(req => req.id === user_to_remove) };
 		});
 	};
 
@@ -54,7 +58,7 @@
 					<h1>{user.username}</h1>
 				</div>
 
-				<FriendSearcher />
+				<FriendSearcher {user} />
 			</div>
 		</div>
 	</div>

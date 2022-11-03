@@ -3,7 +3,7 @@
 	import Button from './Button.svelte';
 
 	export let user;
-	let counter = user?.friend_requests?.length;
+	$: counter = user?.friend_requests?.length;
 
 	let showList = false;
 </script>

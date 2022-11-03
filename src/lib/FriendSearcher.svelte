@@ -5,10 +5,11 @@
 	import UserCard from './UserCard.svelte';
 	import Button from './Button.svelte';
 
+  export let user;
 	let userList = [];
 
 	let query = '';
-	const fetchUsers = async () => {
+	const fetchUsers = async (_user) => {
 		const serverUrl =
 			`${import.meta.env.VITE_SERVER_URL}/users?` +
 			new URLSearchParams({
@@ -27,7 +28,7 @@
 		debouncedFetch();
 	};
 
-	fetchUsers();
+	$: fetchUsers(user);
 
 	let overlayVisible = false;
 </script>
