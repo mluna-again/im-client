@@ -34,7 +34,11 @@
 	>
 		<h1>Friend Requests</h1>
 		{#each user.friend_requests as request (request.id)}
-			<div on:click|stopPropagation class="friend">
+			<div
+				on:click|stopPropagation
+				class="friend"
+				transition:fly={{ y: 300, duration: 300 }}
+			>
 				<RequestCard {request} />
 			</div>
 		{/each}
@@ -100,6 +104,12 @@
 		align-items: center;
 		padding-top: 3rem;
 		z-index: 10;
+		overflow: scroll;
+		scrollbar-width: none;
+	}
+
+	.list::-webkit-scrollbar {
+		display: none;
 	}
 
 	.list h1 {
