@@ -26,6 +26,12 @@
 		margin: 0;
 	}
 
+	@media (max-width: 800px) {
+		.letter h1 {
+			font-size: 3.5rem;
+		}
+	}
+
 	.letter {
 		margin: 0 1px;
 		background-color: black;

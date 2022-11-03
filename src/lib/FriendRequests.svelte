@@ -119,4 +119,11 @@
 	.list .friend {
 		margin: 3rem 0;
 	}
+
+	@media (max-width: 800px) {
+		.container {
+			width: 70px;
+			height: 65px;
+		}
+	}
 </style>

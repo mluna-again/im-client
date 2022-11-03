@@ -33,11 +33,12 @@
 	let overlayVisible = false;
 </script>
 
-<div>
+<div class="container">
 	<Button
 		message="Add friends"
 		onClick={() => (overlayVisible = true)}
 		size="sm"
+		fullWidth
 	/>
 
 	{#if overlayVisible}
@@ -62,5 +63,11 @@
 		left: 0;
 		padding: 5rem 9rem;
 		background-color: rgba(0, 0, 0, 0.3);
+	}
+
+	@media (max-width: 650px) {
+		.container {
+			width: 100%;
+		}
 	}
 </style>

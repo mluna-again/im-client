@@ -8,11 +8,12 @@
 	export let onClick = undefined;
 	export let size = 'md';
 	export let disabled = false;
+	export let fullWidth = false;
 </script>
 
 {#if to}
 	<Link {to}>
-		<button class:white class:red>
+		<button class:white class:red class:fullWidth>
 			{#each message.split('') as letter}
 				<span>{letter}</span>
 			{/each}
@@ -25,6 +26,7 @@
 		on:click={onClick}
 		class:small={size === 'sm'}
 		class:disabled
+		class:fullWidth
 		{disabled}
 	>
 		{#each message.split('') as letter}
@@ -94,7 +96,17 @@
 		padding: 0.3rem;
 	}
 
+	button.fullWidth {
+		width: 100%;
+	}
+
 	button:hover {
 		transform: skew(-3deg, -3deg);
+	}
+
+	@media (max-width: 800px) {
+		button.small {
+			font-size: 1rem;
+		}
 	}
 </style>

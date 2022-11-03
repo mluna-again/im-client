@@ -66,7 +66,7 @@
 			<div class="header">
 				<div class="user">
 					<FriendRequests {user} />
-					<h1>{user.username}</h1>
+					<h1 class="username">{user.username}</h1>
 				</div>
 
 				<FriendSearcher {user} />
@@ -131,5 +131,23 @@
 
 	.header h1 {
 		font-size: 4rem;
+	}
+
+	@media (max-width: 800px) {
+		.header .username {
+			font-size: 2rem;
+		}
+	}
+
+	@media (max-width: 650px) {
+		.header {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+
+		.header .user {
+			margin-bottom: 1rem;
+		}
 	}
 </style>
