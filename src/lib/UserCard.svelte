@@ -25,15 +25,24 @@
 </script>
 
 <div class="container">
-	<h1>
-		{user.username}
-	</h1>
+	<div>
+		<h1>
+			{user.username}
+		</h1>
+		{#if user.invitation_received && !user.invitation_sent}
+			<span>{user.username} send you a friend request!</span>
+		{/if}
+	</div>
 
 	<div>
 		{#if loading}
 			<Button disabled message="..." size="sm" />
-		{:else if user.invitation_sent}
+		{:else if user.invitation_sent && !user.invitation_received}
 			<Button disabled message="request sent" size="sm" />
+		{:else if user.invitation_received && !user.invitation_sent}
+			<Button message="accept request" size="sm" onClick={addFriendHandler} />
+		{:else if (user.invitation_sent && user.invitation_received) || user.friends}
+			<Button disabled message="already friends" size="sm" />
 		{:else}
 			<Button message="add friend" size="sm" onClick={addFriendHandler} />
 		{/if}
