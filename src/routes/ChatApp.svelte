@@ -6,6 +6,7 @@
 	import Logout from '../lib/Logout.svelte';
 	import FriendSearcher from '../lib/FriendSearcher.svelte';
 	import FriendRequests from '../lib/FriendRequests.svelte';
+	import FriendList from '../lib/FriendList.svelte';
 
 	let user = null;
 	let socket = null;
@@ -62,10 +63,12 @@
 				<div class="user">
 					<FriendRequests {user} />
 					<h1>{user.username}</h1>
+
 				</div>
 
 				<FriendSearcher {user} />
 			</div>
+      <FriendList {user} />
 		</div>
 	</div>
 {:else}
