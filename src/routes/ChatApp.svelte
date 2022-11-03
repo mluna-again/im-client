@@ -26,7 +26,7 @@
 			user = {
 				...user,
 				friend_requests: user.friend_requests.filter(
-					(req) => req.id === user_to_remove
+					(req) => req.id !== user_to_remove
 				),
 			};
 		});

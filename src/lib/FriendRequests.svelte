@@ -33,17 +33,15 @@
 		transition:fade={{ y: 300, duration: 300 }}
 	>
 		<h1>Friend Requests</h1>
-		<div>
-			{#each user.friend_requests as request}
-				<div
-					on:click|stopPropagation
-					transition:fly={{ y: 300, duration: 300, delay: 50 }}
-					class="friend"
-				>
-					<RequestCard {request} />
-				</div>
-			{/each}
-		</div>
+		{#each user.friend_requests as request (request.id)}
+			<div on:click|stopPropagation class="friend">
+				<RequestCard {request} />
+			</div>
+		{/each}
+
+		{#if user?.friend_requests?.length < 1}
+			<h1>how empty...</h1>
+		{/if}
 	</div>
 {/if}
 
