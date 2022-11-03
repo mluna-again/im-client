@@ -4,6 +4,7 @@
 	import Logo from '../lib/Logo.svelte';
 	import Logout from '../lib/Logout.svelte';
 	import FriendSearcher from '../lib/FriendSearcher.svelte';
+	import FriendRequests from '../lib/FriendRequests.svelte';
 
 	let user = null;
 	const fetchUser = async () => {
@@ -31,7 +32,11 @@
 			</div>
 
 			<div class="header">
-				<h1>{user.username}</h1>
+				<div class="user">
+					<FriendRequests />
+					<h1>{user.username}</h1>
+				</div>
+
 				<FriendSearcher />
 			</div>
 		</div>
@@ -74,5 +79,14 @@
 	.header {
 		display: flex;
 		justify-content: space-between;
+	}
+
+	.header .user {
+		display: flex;
+		align-items: center;
+	}
+
+	.header h1 {
+		font-size: 4rem;
 	}
 </style>
