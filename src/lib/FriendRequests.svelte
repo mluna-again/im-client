@@ -6,7 +6,7 @@
 	};
 </script>
 
-<button class="container" title="requests" on:click={openOverlay}>
+<button class="container" title="Friend Requests" on:click={openOverlay}>
 	<svg viewBox="0 0 357 438" fill="none" xmlns="http://www.w3.org/2000/svg">
 		<path
 			id="message"
@@ -16,7 +16,7 @@
 		/>
 	</svg>
 	<span class="msg">requests</span>
-	<span class="counter">{counter}</span>
+	<span class="counter">{counter < 101 ? counter : '99+'}</span>
 </button>
 
 <style>
