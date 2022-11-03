@@ -3,6 +3,7 @@
 
 	export let message;
 	export let white = false;
+	export let red = false;
 	export let to = undefined;
 	export let onClick = undefined;
 	export let size = 'md';
@@ -11,7 +12,7 @@
 
 {#if to}
 	<Link {to}>
-		<button class:white>
+		<button class:white class:red>
 			{#each message.split('') as letter}
 				<span>{letter}</span>
 			{/each}
@@ -20,6 +21,7 @@
 {:else}
 	<button
 		class:white
+		class:red
 		on:click={onClick}
 		class:small={size === 'sm'}
 		class:disabled
@@ -38,6 +40,14 @@
 
 	button.white span {
 		color: black;
+	}
+
+	button.red {
+		background-color: #cc0102;
+	}
+
+	button.red span {
+		color: white;
 	}
 
 	button span {

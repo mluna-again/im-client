@@ -40,7 +40,12 @@
 		{:else if user.invitation_sent && !user.invitation_received}
 			<Button disabled message="request sent" size="sm" />
 		{:else if user.invitation_received && !user.invitation_sent}
-			<Button message="accept request" size="sm" onClick={addFriendHandler} />
+			<Button
+				red
+				message="accept request"
+				size="sm"
+				onClick={addFriendHandler}
+			/>
 		{:else if (user.invitation_sent && user.invitation_received) || user.friends}
 			<Button disabled message="already friends" size="sm" />
 		{:else}
