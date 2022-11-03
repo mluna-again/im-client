@@ -2,7 +2,7 @@
 
 @font-face {
   font-family: "Earwig Factory";
-  src: local("Earwig Factory"), url(font.ttf) format("truetype");
+  src: local("Earwig Factory"), url("/font.ttf") format("truetype");
 }
 
 :root {
@@ -34,6 +34,10 @@ body {
   overflow: hidden;
   height: 100vh;
   width: 100vw;
+}
+
+body a {
+  text-decoration: none;
 }
 
 #app {

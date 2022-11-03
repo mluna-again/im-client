@@ -1,4 +1,5 @@
 <script>
+	import { Link } from 'svelte-routing';
 	import NoFriends from './NoFriends.svelte';
 
 	export let user;
@@ -19,19 +20,31 @@
 	{:else}
 		<ul>
 			{#each usersWithAvatar as friend}
-				<li class="friend">
-					<div class="imgContainer">
-						<img src={friend.avatar} alt="{friend.username} icon" />
-					</div>
+				<Link to="/app/{friend.username}">
+					<button>
+						<li class="friend">
+							<div class="imgContainer">
+								<img src={friend.avatar} alt="{friend.username} icon" />
+							</div>
 
-					<p class="message">say hi to {friend.username}</p>
-				</li>
+							<span class="message">say hi to {friend.username}</span>
+						</li>
+					</button>
+				</Link>
 			{/each}
 		</ul>
 	{/if}
 </div>
 
 <style>
+	button {
+		text-decoration: none;
+		display: block;
+		width: 100%;
+		background: none;
+		border: none;
+		text-align: left;
+	}
 	.container {
 		margin: 0 auto;
 		width: 60%;
