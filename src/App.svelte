@@ -14,3 +14,9 @@
 		<Route path="/sign-in"><SignIn /></Route>
 	</Router>
 </main>
+
+<style>
+	main {
+		height: 100%;
+	}
+</style>

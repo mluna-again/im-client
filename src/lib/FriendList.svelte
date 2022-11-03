@@ -14,20 +14,36 @@
 </script>
 
 <div class="container">
-	{#each usersWithAvatar as friend}
-		<div class="friend">
-			<div class="imgContainer">
-				<img src={friend.avatar} alt="{friend.username} icon" />
-			</div>
+	<ul>
+		{#each usersWithAvatar as friend}
+			<li class="friend">
+				<div class="imgContainer">
+					<img src={friend.avatar} alt="{friend.username} icon" />
+				</div>
 
-			<p class="message">say hi to {friend.username}</p>
-		</div>
-	{/each}
+				<p class="message">say hi to {friend.username}</p>
+			</li>
+		{/each}
+	</ul>
 </div>
 
 <style>
 	.container {
-		margin-top: 2rem;
+		margin: 0 auto;
+		width: 60%;
+		height: 90%;
+	}
+
+	.container ul::-webkit-scrollbar {
+		display: none;
+	}
+
+	.container ul {
+		height: 90%;
+		overflow-y: scroll;
+		overflow-x: hidden;
+		padding-bottom: 9rem;
+		scrollbar-width: none;
 	}
 
 	.friend img {
@@ -58,7 +74,7 @@
 		padding-left: 1rem;
 		margin-left: -10px;
 		background-color: black;
-		min-width: 100%;
+		min-width: 90%;
 		clip-path: polygon(0% 0%, 100% -10%, 95% 100%, 0% 110%, 0% 0%);
 		border: none;
 		font-family: 'Poor Story', cursive;

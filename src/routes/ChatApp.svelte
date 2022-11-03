@@ -71,6 +71,8 @@
 
 				<FriendSearcher {user} />
 			</div>
+		</div>
+		<div class="list">
 			<FriendList {user} />
 		</div>
 	</div>
@@ -87,12 +89,19 @@
 
 	.container {
 		display: flex;
-		justify-content: center;
+		align-items: center;
+		flex-direction: column;
+		width: 100%;
+		height: 100%;
+	}
+
+	.list {
+		height: 100%;
+		width: 100%;
 	}
 
 	.phone {
 		position: relative;
-		height: 100vh;
 		width: 60%;
 		padding-top: 8rem;
 	}
@@ -112,6 +121,7 @@
 	.header {
 		display: flex;
 		justify-content: space-between;
+		flex-basis: 20%;
 	}
 
 	.header .user {
