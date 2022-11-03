@@ -50,7 +50,7 @@
 
 			<div class="header">
 				<div class="user">
-					<FriendRequests counter={user.requests} />
+					<FriendRequests {user} />
 					<h1>{user.username}</h1>
 				</div>
 
