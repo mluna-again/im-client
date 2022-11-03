@@ -1,7 +1,7 @@
 <script>
-	export let user;
+	import NoFriends from './NoFriends.svelte';
 
-	$: console.log(user.friends);
+	export let user;
 
 	// TODO: add avatars
 	const iconIndex = () => Math.floor(Math.random() * 7) + 1;
@@ -14,17 +14,21 @@
 </script>
 
 <div class="container">
-	<ul>
-		{#each usersWithAvatar as friend}
-			<li class="friend">
-				<div class="imgContainer">
-					<img src={friend.avatar} alt="{friend.username} icon" />
-				</div>
+	{#if usersWithAvatar?.length < 1}
+		<NoFriends />
+	{:else}
+		<ul>
+			{#each usersWithAvatar as friend}
+				<li class="friend">
+					<div class="imgContainer">
+						<img src={friend.avatar} alt="{friend.username} icon" />
+					</div>
 
-				<p class="message">say hi to {friend.username}</p>
-			</li>
-		{/each}
-	</ul>
+					<p class="message">say hi to {friend.username}</p>
+				</li>
+			{/each}
+		</ul>
+	{/if}
 </div>
 
 <style>
