@@ -16,7 +16,6 @@
 
 	$: maybeConnectMessages(user);
 	$: maybeConnectRequests(user, (channel) => {
-		if (!channel) return;
 		channel.on('new_request', (request) => {
 			user = { ...user, friend_requests: [...user.friend_requests, request] };
 		});

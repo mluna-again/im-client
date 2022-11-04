@@ -6,7 +6,7 @@
 	export let username;
 	let user = null;
 
-	$: maybeConnect({ id: 2 });
+	$: maybeConnect(user);
 </script>
 
 <div in:fly={{ y: 300, duration: 300, delay: 500 }}>
