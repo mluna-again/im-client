@@ -16,7 +16,6 @@ export const connectSocket = (user, setupFunc) => {
 
 	channel.join().receive('ok', () => console.log('joined requests channel'));
 
-	console.log(setupFunc);
 	if (setupFunc) {
 		setupFunc(channel);
 	}

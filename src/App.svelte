@@ -1,6 +1,6 @@
 <script>
 	import { onDestroy } from 'svelte';
-	import { Router, Route } from 'svelte-routing';
+	import { Router, Route, navigate } from 'svelte-routing';
 	import Home from './routes/Home.svelte';
 	import SignIn from './routes/SignIn.svelte';
 	import Login from './routes/Login.svelte';
@@ -8,11 +8,25 @@
 	import ChatApp from './routes/ChatApp.svelte';
 	import { disconnectSocket as disconnectMessagesSocket } from './channels/messages.js';
 	import { disconnectSocket as disconnectRequestsSocket } from './channels/requests.js';
+	import { user } from './store.js';
 
 	onDestroy(() => {
 		disconnectMessagesSocket();
 		disconnectRequestsSocket();
 	});
+
+	const checkIfUserIsLogged = async () => {
+		const serverUrl = `${import.meta.env.VITE_SERVER_URL}/users/logged`;
+		const response = await fetch(serverUrl, { credentials: 'include' });
+		if (!response.ok) {
+			return;
+		}
+
+		const data = await response.json();
+		user.set(data);
+		navigate('/app', { replace: true });
+	};
+	checkIfUserIsLogged();
 </script>
 
 <main>
