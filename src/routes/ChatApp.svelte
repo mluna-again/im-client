@@ -7,10 +7,13 @@
 	import FriendSearcher from '../lib/FriendSearcher.svelte';
 	import FriendRequests from '../lib/FriendRequests.svelte';
 	import FriendList from '../lib/FriendList.svelte';
+  import { maybeConnect as maybeConnectMessages } from '../channels/messages.js';
 
 	let user = null;
 	let socket = null;
 	let channel = null;
+
+  $: maybeConnectMessages(user);
 
 	const connectSocket = () => {
 		socket = new Socket(`${import.meta.env.VITE_SERVER_WS}/socket`, {
@@ -18,7 +21,10 @@
 		});
 		socket.connect();
 		channel = socket.channel('requests:' + user.id);
-		channel.join().receive('ok', () => console.log('joined channel'));
+
+    channel.onClose(() => console.log("requests channel closed"))
+
+		channel.join().receive('ok', () => console.log('joined requests channel'));
 		channel.on('new_request', (request) => {
 			user = { ...user, friend_requests: [...user.friend_requests, request] };
 		});
