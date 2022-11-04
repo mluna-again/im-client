@@ -1,8 +1,10 @@
 <script>
 	import { fly } from 'svelte/transition';
 	import GoBack from '../lib/GoBack.svelte';
+	import Message from '../lib/Message.svelte';
 	import { fetchUserByUsername } from '../http/user.js';
 	import { fetchMessages } from '../http/message.js';
+  import { user } from '../store.js';
 
 	export let username;
 	let error = null;
@@ -23,7 +25,6 @@
 	};
 
 	$: fetchUserAndMessages(username);
-	$: console.log(messages);
 </script>
 
 <div class="wrapper" in:fly={{ y: 300, duration: 300, delay: 500 }}>
@@ -35,7 +36,9 @@
 		<div class="messages">
 			<ul>
 				{#each messages as message (message.id)}
-					<li>{message.content}</li>
+					<li>
+            <Message reverse={$user?.id === message.user.id} content={message.content} />
+          </li>
 				{/each}
 			</ul>
 		</div>
@@ -52,11 +55,18 @@
 		height: calc(100% - 2rem);
 		transform: skew(2deg);
 		padding-top: 3rem;
-		border: 7px solid black;
 	}
 
 	h1 {
 		text-align: center;
 		font-size: 4rem;
 	}
+
+  ul {
+    list-style: none;
+    margin-top: 3rem;
+    padding: 0 2rem;
+    display: flex;
+    flex-direction: column;
+  }
 </style>
