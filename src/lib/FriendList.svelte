@@ -1,5 +1,6 @@
 <script>
 	import { Link } from 'svelte-routing';
+	import { fly } from 'svelte/transition';
 	import NoFriends from './NoFriends.svelte';
 
 	export let user;
@@ -19,18 +20,20 @@
 		<NoFriends />
 	{:else}
 		<ul>
-			{#each usersWithAvatar as friend}
-				<Link to="/app/{friend.username}">
-					<button>
-						<li class="friend">
-							<div class="imgContainer">
-								<img src={friend.avatar} alt="{friend.username} icon" />
-							</div>
+			{#each usersWithAvatar as friend, index}
+				<div transition:fly={{ y: 50, duration: 300, delay: 300 + index * 50 }}>
+					<Link to="/app/{friend.username}">
+						<button>
+							<li class="friend">
+								<div class="imgContainer">
+									<img src={friend.avatar} alt="{friend.username} icon" />
+								</div>
 
-							<span class="message">say hi to {friend.username}</span>
-						</li>
-					</button>
-				</Link>
+								<span class="message">say hi to {friend.username}</span>
+							</li>
+						</button>
+					</Link>
+				</div>
 			{/each}
 		</ul>
 	{/if}
