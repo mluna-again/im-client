@@ -10,10 +10,13 @@ export const connectSocket = (user, setupFunc) => {
 		params: { token: window.localStorage.getItem('t') },
 	});
 	socket.connect();
-	channel = socket.channel('messages:' + user.id);
-	channel.onClose(() => console.log('messages channel closed'));
-	channel.join().receive('ok', () => console.log('joined messages channel'));
+	channel = socket.channel('requests:' + user.id);
 
+	channel.onClose(() => console.log('requests channel closed'));
+
+	channel.join().receive('ok', () => console.log('joined requests channel'));
+
+	console.log(setupFunc);
 	if (setupFunc) {
 		setupFunc(channel);
 	}

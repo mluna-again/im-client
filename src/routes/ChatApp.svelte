@@ -7,24 +7,16 @@
 	import FriendSearcher from '../lib/FriendSearcher.svelte';
 	import FriendRequests from '../lib/FriendRequests.svelte';
 	import FriendList from '../lib/FriendList.svelte';
-  import { maybeConnect as maybeConnectMessages } from '../channels/messages.js';
+	import { maybeConnect as maybeConnectMessages } from '../channels/messages.js';
+	import { maybeConnect as maybeConnectRequests } from '../channels/requests.js';
 
 	let user = null;
 	let socket = null;
 	let channel = null;
 
-  $: maybeConnectMessages(user);
-
-	const connectSocket = () => {
-		socket = new Socket(`${import.meta.env.VITE_SERVER_WS}/socket`, {
-			params: { token: window.localStorage.getItem('t') },
-		});
-		socket.connect();
-		channel = socket.channel('requests:' + user.id);
-
-    channel.onClose(() => console.log("requests channel closed"))
-
-		channel.join().receive('ok', () => console.log('joined requests channel'));
+	$: maybeConnectMessages(user);
+	$: maybeConnectRequests(user, (channel) => {
+		if (!channel) return;
 		channel.on('new_request', (request) => {
 			user = { ...user, friend_requests: [...user.friend_requests, request] };
 		});
@@ -42,7 +34,7 @@
 				friends: [...user.friends, user_to_remove],
 			};
 		});
-	};
+	});
 
 	const fetchUser = async () => {
 		const serverUrl = `${import.meta.env.VITE_SERVER_URL}/users/logged`;
@@ -53,7 +45,6 @@
 		}
 		const data = await response.json();
 		user = data;
-		connectSocket(data);
 	};
 
 	fetchUser();

@@ -1,12 +1,12 @@
 <script>
 	import { fly } from 'svelte/transition';
 	import GoBack from '../lib/GoBack.svelte';
-  import { maybeConnect } from '../channels/messages.js';
+	import { maybeConnect } from '../channels/messages.js';
 
 	export let username;
-  let user = null;
+	let user = null;
 
-  $: maybeConnect({id: 2});
+	$: maybeConnect({ id: 2 });
 </script>
 
 <div in:fly={{ y: 300, duration: 300, delay: 500 }}>

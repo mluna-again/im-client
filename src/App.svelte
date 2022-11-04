@@ -1,16 +1,18 @@
 <script>
-  import { onDestroy } from 'svelte';
+	import { onDestroy } from 'svelte';
 	import { Router, Route } from 'svelte-routing';
 	import Home from './routes/Home.svelte';
 	import SignIn from './routes/SignIn.svelte';
 	import Login from './routes/Login.svelte';
 	import Room from './routes/Room.svelte';
 	import ChatApp from './routes/ChatApp.svelte';
-  import { disconnectSocket as disconnectMessagesSocket } from './channels/messages.js';
+	import { disconnectSocket as disconnectMessagesSocket } from './channels/messages.js';
+	import { disconnectSocket as disconnectRequestsSocket } from './channels/requests.js';
 
-  onDestroy(() => {
-    disconnectMessagesSocket();
-  });
+	onDestroy(() => {
+		disconnectMessagesSocket();
+		disconnectRequestsSocket();
+	});
 </script>
 
 <main>
