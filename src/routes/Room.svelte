@@ -1,42 +1,58 @@
 <script>
 	import { fly } from 'svelte/transition';
 	import GoBack from '../lib/GoBack.svelte';
-	import { maybeConnect } from '../channels/messages.js';
 	import { fetchUserByUsername } from '../http/user.js';
+	import { fetchMessages } from '../http/message.js';
 
 	export let username;
-	let user = null;
-  let error = null;
-  let friend = null;
+	let error = null;
+	let friend = null;
+	let messages = [];
 
-	$: maybeConnect(user);
+	const fetchUserAndMessages = async (username) => {
+		console.log('fetching messages');
+		if (friend) return;
 
-  fetchUserByUsername(username)
-  .then(data => friend = data)
-  .catch(err => error = err);
+		try {
+			const user = await fetchUserByUsername(username);
+			const data = await fetchMessages(user);
+			messages = data;
+		} catch (err) {
+			error = err;
+		}
+	};
 
-  $: console.log(user)
+	$: fetchUserAndMessages(username);
+	$: console.log(messages);
 </script>
 
 <div class="wrapper" in:fly={{ y: 300, duration: 300, delay: 500 }}>
 	<GoBack to="/app" />
 
-  <div class="container">
-    <h1>{username}</h1>
-  </div>
+	<div class="container">
+		<h1>{username}</h1>
+
+		<div class="messages">
+			<ul>
+				{#each messages as message (message.id)}
+					<li>{message.content}</li>
+				{/each}
+			</ul>
+		</div>
+	</div>
 </div>
 
 <style>
-  .wrapper {
-    height: 100vh;
-  }
+	.wrapper {
+		height: 100vh;
+	}
 
 	.container {
-    margin: 1rem 20rem;
-    height: calc(100% - 2rem);
-    transform: skew(2deg);
+		margin: 1rem 20rem;
+		height: calc(100% - 2rem);
+		transform: skew(2deg);
 		padding-top: 3rem;
-    border: 7px solid black;
+		border: 7px solid black;
 	}
 
 	h1 {
