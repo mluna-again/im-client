@@ -55,7 +55,11 @@
 
 {#if user}
 	<div class="container">
-		<div class="phone" in:fly={{ y: 200, duration: 300 }}>
+		<div
+			class="phone"
+			in:fly={{ y: 200, duration: 300 }}
+			out:fly={{ y: 200, duration: 300, delay: 200 }}
+		>
 			<div class="logout">
 				<Logout />
 			</div>

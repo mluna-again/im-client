@@ -21,7 +21,10 @@
 	{:else}
 		<ul>
 			{#each usersWithAvatar as friend, index}
-				<div transition:fly={{ y: 50, duration: 300, delay: 300 + index * 50 }}>
+				<div
+					in:fly={{ y: 50, duration: 300, delay: 300 + index * 50 }}
+					out:fly={{ y: 50, duration: 300, delay: index * 50 }}
+				>
 					<Link to="/app/{friend.username}">
 						<button>
 							<li class="friend">
