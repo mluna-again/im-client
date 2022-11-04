@@ -1,6 +1,6 @@
 <script>
 	import { navigate } from 'svelte-routing';
-	import { fly } from 'svelte/transition';
+	import { fly, fade } from 'svelte/transition';
 	import { Socket } from 'phoenix';
 	import Logo from '../lib/Logo.svelte';
 	import Logout from '../lib/Logout.svelte';
@@ -81,7 +81,7 @@
 		</div>
 	</div>
 {:else}
-	<h1 in:fly={{ y: 200, duration: 300 }} class="loading">Loading...</h1>
+	<h1 transition:fade={{ duration: 300 }} class="loading">Loading...</h1>
 {/if}
 
 <style>
