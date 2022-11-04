@@ -24,6 +24,7 @@
 		return null;
 	};
 
+	let loading = false;
 	let error = null;
 	const submitHandler = async () => {
 		if (!username || !password) {
@@ -38,6 +39,9 @@
 				password,
 			},
 		};
+
+		loading = true;
+
 		const response = await fetch(serverUrl, {
 			method: 'POST',
 			body: JSON.stringify(data),
@@ -47,12 +51,37 @@
 			},
 		});
 
+		loading = false;
+
 		if (!response.ok) {
 			error = `server says: ${response.statusText}`;
 			return;
 		}
 
-		navigate('/app', { replace: true });
+		const loginUrl = `${import.meta.env.VITE_SERVER_URL}/log-in`;
+		const loginData = {
+			user: {
+				username,
+				password,
+			},
+		};
+		loading = true;
+		const loginResponse = await fetch(loginUrl, {
+			method: 'POST',
+			body: JSON.stringify(loginData),
+			credentials: 'include',
+			headers: {
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+			},
+		});
+
+		if (loginResponse.ok) {
+			navigate('/app', { replace: true });
+			return;
+		}
+
+		navigate('/', { replace: true });
 		error = null;
 	};
 </script>
@@ -77,7 +106,7 @@
 		/>
 
 		<div class="btn">
-			<Button message="Create Account" />
+			<Button message={loading ? '...' : 'Create Account'} />
 		</div>
 	</form>
 
