@@ -77,7 +77,7 @@
 	};
 </script>
 
-<div class="container" in:fly={{ duration: 300, y: 200 }}>
+<div class="container" transition:fly={{ duration: 300, y: 300, delay: 300 }}>
 	<GoBack />
 
 	<h1>Log in</h1>

@@ -1,8 +1,9 @@
 <script>
+	import { fly } from 'svelte/transition';
 	import Button from '../lib/Button.svelte';
 </script>
 
-<div class="container">
+<div class="container" transition:fly={{ y: 300, duration: 300 }}>
 	<h1>Welcome to IM!</h1>
 
 	<div class="btn">
