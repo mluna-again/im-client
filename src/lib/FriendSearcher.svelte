@@ -14,7 +14,7 @@
 			`${import.meta.env.VITE_SERVER_URL}/users?` +
 			new URLSearchParams({
 				search: query,
-				limit: 10,
+				limit: 5,
 			});
 
 		const response = await fetch(serverUrl, { credentials: 'include' });
