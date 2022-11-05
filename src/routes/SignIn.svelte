@@ -81,6 +81,8 @@
 			return;
 		}
 
+		const { token } = await response.json();
+		window.localStorage.setItem('t', token);
 		navigate('/', { replace: true });
 		error = null;
 	};
