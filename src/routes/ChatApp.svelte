@@ -9,7 +9,11 @@
 	import FriendList from '../lib/FriendList.svelte';
 	import { maybeConnect as maybeConnectMessages } from '../channels/messages.js';
 	import { maybeConnect as maybeConnectRequests } from '../channels/requests.js';
-	import { requestsChannel, messagesChannel } from '../store.js';
+	import {
+		requestsChannel,
+		messagesChannel,
+		user as userStore,
+	} from '../store.js';
 
 	let user = null;
 
@@ -52,6 +56,8 @@
 		}
 		const data = await response.json();
 		user = data;
+
+		userStore.set(data);
 	};
 
 	fetchUser();
