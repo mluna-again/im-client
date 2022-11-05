@@ -4,25 +4,13 @@
 	import GoBack from '../lib/GoBack.svelte';
 	import Input from '../lib/Input.svelte';
 	import Button from '../lib/Button.svelte';
+	import { validateUsername } from '../validators/username.js';
+	import { validatePassword } from '../validators/password.js';
 
 	let username = '';
 	let password = '';
 	const setUsername = (text) => (username = text);
 	const setPassword = (text) => (password = text);
-
-	const validateUsername = (username) => {
-		if (username.length < 4) return 'too short';
-		if (username.length > 15) return 'too long';
-
-		return null;
-	};
-
-	const validatePassword = (password) => {
-		if (password.length < 6) return 'too short';
-		if (password.length > 72) return 'too long';
-
-		return null;
-	};
 
 	let loading = false;
 	let error = null;
