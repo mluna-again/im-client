@@ -6,9 +6,25 @@
 	import Login from './routes/Login.svelte';
 	import Room from './routes/Room.svelte';
 	import ChatApp from './routes/ChatApp.svelte';
-	import { disconnectSocket as disconnectMessagesSocket } from './channels/messages.js';
-	import { disconnectSocket as disconnectRequestsSocket } from './channels/requests.js';
-	import { user } from './store.js';
+	import {
+		disconnectSocket as disconnectMessagesSocket,
+		connectSocket as connectMessages,
+	} from './channels/messages.js';
+	import {
+		disconnectSocket as disconnectRequestsSocket,
+		connectSocket as connectRequests,
+	} from './channels/requests.js';
+	import { user, requestsChannel, messagesChannel } from './store.js';
+
+	user.subscribe((user) => {
+		connectMessages(user, (channel) => {
+			messagesChannel.set(channel);
+		});
+
+		connectRequests(user, (channel) => {
+			requestsChannel.set(channel);
+		});
+	});
 
 	onDestroy(() => {
 		disconnectMessagesSocket();

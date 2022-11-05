@@ -5,7 +5,7 @@
 	import Input from '../lib/Input.svelte';
 	import Button from '../lib/Button.svelte';
 	import { fetchUserByUsername } from '../http/user.js';
-	import { fetchMessages } from '../http/message.js';
+	import { fetchMessages, sendMessage } from '../http/message.js';
 	import { user } from '../store.js';
 
 	export let username;
@@ -13,6 +13,7 @@
 	let friend = null;
 	let messages = [];
 	let currentMessage = '';
+	let sendingMessage = false;
 
 	const fetchUserAndMessages = async (username) => {
 		if (friend) return;
@@ -21,6 +22,7 @@
 			const user = await fetchUserByUsername(username);
 			const data = await fetchMessages(user);
 			messages = data;
+			friend = user;
 		} catch (err) {
 			error = err;
 		}
@@ -28,8 +30,18 @@
 
 	$: fetchUserAndMessages(username);
 
-	const sendMessageHandler = () => {
-		console.log(currentMessage);
+	const sendMessageHandler = async () => {
+		if (!currentMessage || !friend) return;
+
+		sendingMessage = true;
+
+		try {
+			sendMessage(friend, currentMessage);
+		} catch (err) {
+			error = err;
+		}
+
+		sendingMessage = false;
 	};
 </script>
 
@@ -41,30 +53,6 @@
 
 		<div class="messages">
 			<ul>
-				{#each messages as message (message.id)}
-					<li>
-						<Message
-							reverse={$user?.id === message.user.id}
-							content={message.content}
-						/>
-					</li>
-				{/each}
-				{#each messages as message (message.id)}
-					<li>
-						<Message
-							reverse={$user?.id === message.user.id}
-							content={message.content}
-						/>
-					</li>
-				{/each}
-				{#each messages as message (message.id)}
-					<li>
-						<Message
-							reverse={$user?.id === message.user.id}
-							content={message.content}
-						/>
-					</li>
-				{/each}
 				{#each messages as message (message.id)}
 					<li>
 						<Message
@@ -112,7 +100,8 @@
 		display: flex;
 		flex-direction: column;
 		height: 100%;
-		overflow: scroll;
+		overflow-y: scroll;
+		overflow-x: hidden;
 	}
 
 	.form {

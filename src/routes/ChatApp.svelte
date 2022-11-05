@@ -9,30 +9,38 @@
 	import FriendList from '../lib/FriendList.svelte';
 	import { maybeConnect as maybeConnectMessages } from '../channels/messages.js';
 	import { maybeConnect as maybeConnectRequests } from '../channels/requests.js';
+	import { requestsChannel, messagesChannel } from '../store.js';
 
 	let user = null;
-	let socket = null;
-	let channel = null;
 
-	$: maybeConnectMessages(user);
-	$: maybeConnectRequests(user, (channel) => {
-		channel.on('new_request', (request) => {
-			user = { ...user, friend_requests: [...user.friend_requests, request] };
-		});
+	const addNewRequest = (request) => {
+		user = { ...user, friend_requests: [...user.friend_requests, request] };
+	};
 
-		channel.on('new_friend', (friend) => {
-			user = { ...user, friends: [...user.friends, friend] };
-		});
+	const newFriend = (friend) => {
+		user = { ...user, friends: [...user.friends, friend] };
+	};
 
-		channel.on('remove_request', ({ user_to_remove }) => {
-			user = {
-				...user,
-				friend_requests: user.friend_requests.filter(
-					(req) => req.id !== user_to_remove.id
-				),
-				friends: [...user.friends, user_to_remove],
-			};
-		});
+	const removeRequest = ({ user_to_remove }) => {
+		user = {
+			...user,
+			friend_requests: user.friend_requests.filter(
+				(req) => req.id !== user_to_remove.id
+			),
+			friends: [...user.friends, user_to_remove],
+		};
+	};
+
+	requestsChannel.subscribe((channel) => {
+		if (!channel) return;
+
+		// avoid duplicate events
+		channel.off('new_request', addNewRequest);
+		channel.off('new_friend', newFriend);
+		channel.off('remove_request', removeRequest);
+		channel.on('new_request', addNewRequest);
+		channel.on('new_friend', newFriend);
+		channel.on('remove_request', removeRequest);
 	});
 
 	const fetchUser = async () => {
