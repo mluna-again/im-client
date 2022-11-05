@@ -5,6 +5,7 @@
 	export let validate = undefined;
 	export let placeholder = '';
 	export let noMotion = false;
+	export let value = '';
 
 	let error = null;
 
@@ -24,7 +25,11 @@
 
 <div class="container" class:reverse class:noMotion>
 	<span class="placeholder">{placeholder}</span>
-	<input type={password ? 'password' : 'text'} on:input={changeHandler} />
+	<input
+		{value}
+		type={password ? 'password' : 'text'}
+		on:input={changeHandler}
+	/>
 	{#if error}
 		<span class="err">{error}</span>
 	{/if}

@@ -6,7 +6,7 @@
 	import Button from '../lib/Button.svelte';
 	import { fetchUserByUsername } from '../http/user.js';
 	import { fetchMessages, sendMessage } from '../http/message.js';
-	import { user } from '../store.js';
+	import { user, messagesChannel } from '../store.js';
 
 	export let username;
 	let error = null;
@@ -43,6 +43,18 @@
 
 		sendingMessage = false;
 	};
+
+	const addNewMessage = (message) => {
+		messages = [...messages, message];
+		currentMessage = '';
+	};
+
+	messagesChannel.subscribe((channel) => {
+		if (!channel) return;
+
+		channel.off('new_message', addNewMessage);
+		channel.on('new_message', addNewMessage);
+	});
 </script>
 
 <div class="wrapper" in:fly={{ y: 300, duration: 300, delay: 500 }}>
@@ -65,7 +77,11 @@
 		</div>
 
 		<form on:submit|preventDefault={sendMessageHandler} class="form">
-			<Input onChange={(value) => (currentMessage = value)} noMotion />
+			<Input
+				value={currentMessage}
+				onChange={(value) => (currentMessage = value)}
+				noMotion
+			/>
 			<div class="submit-btn">
 				<Button message="send" size="sm" />
 			</div>
