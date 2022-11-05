@@ -15,6 +15,13 @@
 	let currentMessage = '';
 	let sendingMessage = false;
 
+	const scrollMessages = () => {
+		const list = document.getElementById('messages-list');
+		if (!list) return;
+
+		list.scrollTop = list.scrollHeight;
+	};
+
 	const fetchUserAndMessages = async (username) => {
 		if (friend) return;
 
@@ -26,6 +33,8 @@
 		} catch (err) {
 			error = err;
 		}
+
+		setTimeout(scrollMessages, 100); // this makes me sad
 	};
 
 	$: fetchUserAndMessages(username);
@@ -47,6 +56,8 @@
 	const addNewMessage = (message) => {
 		messages = [...messages, message];
 		currentMessage = '';
+
+		setTimeout(scrollMessages, 100); // this makes me sad again
 	};
 
 	messagesChannel.subscribe((channel) => {
@@ -64,7 +75,7 @@
 		<h1>{username}</h1>
 
 		<div class="messages">
-			<ul>
+			<ul id="messages-list">
 				{#each messages as message (message.id)}
 					<li>
 						<Message
