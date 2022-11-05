@@ -10,6 +10,7 @@
 			credentials: 'include',
 		});
 
+    window.localStorage.removeItem("t");
 		navigate('/', { replace: true });
 
 		disconnectRequests();
