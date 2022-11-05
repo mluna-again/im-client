@@ -6,6 +6,7 @@
 	import Login from './routes/Login.svelte';
 	import Room from './routes/Room.svelte';
 	import ChatApp from './routes/ChatApp.svelte';
+	import NoConnectionMessage from './lib/NoConnectionMessage.svelte';
 	import {
 		disconnectSocket as disconnectMessagesSocket,
 		maybeConnect as connectMessages,
@@ -14,7 +15,12 @@
 		disconnectSocket as disconnectRequestsSocket,
 		maybeConnect as connectRequests,
 	} from './channels/requests.js';
-	import { user, requestsChannel, messagesChannel } from './store.js';
+	import {
+		user,
+		requestsChannel,
+		messagesChannel,
+		disconnectionAlert,
+	} from './store.js';
 
 	user.subscribe((user) => {
 		connectMessages(user, (channel) => {
@@ -49,6 +55,9 @@
 </script>
 
 <main>
+	{#if $disconnectionAlert}
+		<NoConnectionMessage />
+	{/if}
 	<Router>
 		<Route path="/"><Home /></Route>
 		<Route path="/app"><ChatApp /></Route>

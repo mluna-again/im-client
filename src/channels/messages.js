@@ -1,4 +1,5 @@
 import { Socket } from 'phoenix';
+import { disconnectionAlert } from '../store.js';
 
 export let socket = null;
 export let channel = null;
@@ -11,8 +12,10 @@ export const connectSocket = (user, setupFunc) => {
 	});
 	socket.connect();
 	channel = socket.channel('messages:' + user.id);
-	channel.onClose(() => console.log('messages channel closed'));
-	channel.join().receive('ok', () => console.log('joined messages channel'));
+
+	channel.onError(() => disconnectionAlert.set(true));
+
+	channel.join().receive('ok', () => disconnectionAlert.set(false));
 
 	if (setupFunc) {
 		setupFunc(channel);

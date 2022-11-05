@@ -5,3 +5,5 @@ export const user = writable(null);
 export const messagesChannel = writable(null);
 
 export const requestsChannel = writable(null);
+
+export const disconnectionAlert = writable(false);
