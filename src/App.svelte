@@ -55,7 +55,7 @@
 </script>
 
 <main>
-	{#if $disconnectionAlert}
+	{#if $disconnectionAlert.some(Boolean)}
 		<NoConnectionMessage />
 	{/if}
 	<Router>

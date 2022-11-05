@@ -13,9 +13,15 @@ export const connectSocket = (user, setupFunc) => {
 	socket.connect();
 	channel = socket.channel('messages:' + user.id);
 
-	channel.onError(() => disconnectionAlert.set(true));
+	channel.onError(() =>
+		disconnectionAlert.update(([_msgError, reqError]) => [true, reqError])
+	);
 
-	channel.join().receive('ok', () => disconnectionAlert.set(false));
+	channel
+		.join()
+		.receive('ok', () =>
+			disconnectionAlert.update(([_msgError, reqError]) => [false, reqError])
+		);
 
 	if (setupFunc) {
 		setupFunc(channel);

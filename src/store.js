@@ -6,4 +6,5 @@ export const messagesChannel = writable(null);
 
 export const requestsChannel = writable(null);
 
-export const disconnectionAlert = writable(false);
+// [messagesChannelError, requestsChannelError]
+export const disconnectionAlert = writable([false, false]);
