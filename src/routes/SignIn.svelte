@@ -77,12 +77,12 @@
 		});
 
 		if (loginResponse.ok) {
+			const { token } = await loginResponse.json();
+			window.localStorage.setItem('t', token);
 			navigate('/app', { replace: true });
 			return;
 		}
 
-		const { token } = await response.json();
-		window.localStorage.setItem('t', token);
 		navigate('/', { replace: true });
 		error = null;
 	};
