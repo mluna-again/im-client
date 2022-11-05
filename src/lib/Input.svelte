@@ -4,6 +4,7 @@
 	export let onChange = undefined;
 	export let validate = undefined;
 	export let placeholder = '';
+	export let noMotion = false;
 
 	let error = null;
 
@@ -21,7 +22,7 @@
 	};
 </script>
 
-<div class="container" class:reverse>
+<div class="container" class:reverse class:noMotion>
 	<span class="placeholder">{placeholder}</span>
 	<input type={password ? 'password' : 'text'} on:input={changeHandler} />
 	{#if error}
@@ -87,6 +88,11 @@
 
 	.container.reverse:hover {
 		transform: skew(-20deg) rotate(2deg);
+	}
+
+	.container.reverse.noMotion:hover,
+	.container.noMotion:hover {
+		transform: skew(20deg);
 	}
 
 	input {

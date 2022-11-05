@@ -1,10 +1,10 @@
 <script>
-  export let content;
-  export let reverse = false;
+	export let content;
+	export let reverse = false;
 </script>
 
 <div class:reverse>
-  <span>{content}</span>
+	<span>{content}</span>
 	{#if reverse}
 		<svg
 			class="tail"
@@ -29,45 +29,45 @@
 	{/if}
 </div>
 
-  <style>
-  div {
-    margin-bottom: 1rem;
-    background-color: black;
-    color: white;
-    font-size: 3rem;
-    padding: 0.8rem 0 0.8rem 0.5rem;
-    font-family: 'Poor Story', cursive;
-    transform: skew(10deg);
-    width: 50%;
-    margin-right: auto;
-    display: relative;
-  }
+<style>
+	div {
+		margin-bottom: 1rem;
+		background-color: black;
+		color: white;
+		font-size: 3rem;
+		padding: 0.8rem 0 0.8rem 0.5rem;
+		font-family: 'Poor Story', cursive;
+		transform: skew(10deg);
+		width: 50%;
+		margin-right: auto;
+		display: relative;
+	}
 
-  div.reverse {
-    text-align: right;
-    padding: 0.8rem 0.5rem 0.8rem 0;
-    margin-right: 0;
-    margin-left: auto;
-    transform: skew(-10deg);
-    background-color: white;
-    color: black;
-  }
+	div.reverse {
+		text-align: right;
+		padding: 0.8rem 0.5rem 0.8rem 0;
+		margin-right: 0;
+		margin-left: auto;
+		transform: skew(-10deg);
+		background-color: white;
+		color: black;
+	}
 
 	.tail {
 		width: 40px;
 		height: 30px;
 		position: absolute;
 		left: -35px;
-    bottom: 0;
+		bottom: 0;
 		fill: black;
 		stroke: black;
-    transform: rotate(180deg);
+		transform: rotate(180deg);
 	}
 
 	.tail.reverse {
 		stroke: white;
-    fill: white;
-    right: -35px;
-    left: unset;
+		fill: white;
+		right: -35px;
+		left: unset;
 	}
 </style>

@@ -1,7 +1,7 @@
 <script>
 	import { navigate } from 'svelte-routing';
-  import { disconnectSocket as disconnectRequests } from '../channels/requests.js'
-  import { disconnectSocket as disconnectMessages } from '../channels/messages.js'
+	import { disconnectSocket as disconnectRequests } from '../channels/requests.js';
+	import { disconnectSocket as disconnectMessages } from '../channels/messages.js';
 
 	const logoutHandler = async () => {
 		const serverUrl = `${import.meta.env.VITE_SERVER_URL}/log-out`;
@@ -12,8 +12,8 @@
 
 		navigate('/', { replace: true });
 
-    disconnectRequests();
-    disconnectMessages();
+		disconnectRequests();
+		disconnectMessages();
 	};
 </script>
 

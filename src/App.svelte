@@ -24,9 +24,9 @@
 
 		const data = await response.json();
 		user.set(data);
-    if (window.location.href.split("/").includes("app")) {
-      return;
-    }
+		if (window.location.href.split('/').includes('app')) {
+			return;
+		}
 		navigate('/app', { replace: true });
 	};
 	checkIfUserIsLogged();
