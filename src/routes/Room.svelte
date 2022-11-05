@@ -141,4 +141,21 @@
 		left: -5%;
 		transform: translateY(-50%);
 	}
+
+	@media (max-width: 1100px) {
+		.container {
+			margin: 1rem 10rem;
+		}
+	}
+
+	@media (max-width: 800px) {
+		.container {
+			margin: 1rem 5rem;
+		}
+	}
+	@media (max-width: 600px) {
+		.container {
+			margin: 1rem 2rem;
+		}
+	}
 </style>

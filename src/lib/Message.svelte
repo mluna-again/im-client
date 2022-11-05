@@ -34,7 +34,7 @@
 		margin-bottom: 1rem;
 		background-color: black;
 		color: white;
-		font-size: 3rem;
+		font-size: 2rem;
 		padding: 0.8rem 0 0.8rem 0.5rem;
 		font-family: 'Poor Story', cursive;
 		transform: skew(10deg);
@@ -69,5 +69,22 @@
 		fill: white;
 		right: -35px;
 		left: unset;
+	}
+
+	@media (max-width: 1100px) {
+		span {
+			font-size: 1.7rem;
+		}
+	}
+
+	@media (max-width: 800px) {
+		span {
+			font-size: 1.4rem;
+		}
+	}
+	@media (max-width: 600px) {
+		span {
+			font-size: 1.2rem;
+		}
 	}
 </style>
