@@ -8,11 +8,11 @@
 	import ChatApp from './routes/ChatApp.svelte';
 	import {
 		disconnectSocket as disconnectMessagesSocket,
-		connectSocket as connectMessages,
+		maybeConnect as connectMessages,
 	} from './channels/messages.js';
 	import {
 		disconnectSocket as disconnectRequestsSocket,
-		connectSocket as connectRequests,
+		maybeConnect as connectRequests,
 	} from './channels/requests.js';
 	import { user, requestsChannel, messagesChannel } from './store.js';
 
