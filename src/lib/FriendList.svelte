@@ -3,25 +3,17 @@
 	import { fly } from 'svelte/transition';
 	import NoFriends from './NoFriends.svelte';
 	import MessageDateLabel from './MessageDateLabel.svelte';
+	import { ICONS } from '../icons.js';
 
 	export let user;
-
-	// TODO: add avatars
-	const iconIndex = () => Math.floor(Math.random() * 7) + 1;
-	const iconPath = () => `/icons/${iconIndex()}.png`;
-
-	$: usersWithAvatar = user?.friends?.map((user) => ({
-		...user,
-		avatar: iconPath(),
-	}));
 </script>
 
 <div class="container">
-	{#if usersWithAvatar?.length < 1}
+	{#if user?.friends?.length < 1}
 		<NoFriends />
 	{:else}
 		<ul>
-			{#each usersWithAvatar as friend, index (friend.id)}
+			{#each user?.friends as friend, index (friend.id)}
 				<div
 					in:fly={{ y: 50, duration: 300, delay: 300 + index * 50 }}
 					out:fly={{ y: 50, duration: 300, delay: index * 50 }}
@@ -34,7 +26,10 @@
 								</div>
 
 								<div class="imgContainer">
-									<img src={friend.avatar} alt="{friend.username} icon" />
+									<img
+										src={`/icons/${friend.icon}.png`}
+										alt="{friend.username} icon"
+									/>
 								</div>
 
 								<span class="message"
