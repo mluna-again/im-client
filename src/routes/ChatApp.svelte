@@ -35,6 +35,21 @@
 		};
 	};
 
+	const addNewMessage = (message) => {
+		user = {
+			...user,
+			friends: user.friends.map((friend) => {
+				if (friend.id === message.user.id)
+					return {
+						...friend,
+						pending_messages_count: (friend.pending_messages_count || 0) + 1,
+						last_message: message.content,
+					};
+				return friend;
+			}),
+		};
+	};
+
 	requestsChannel.subscribe((channel) => {
 		if (!channel) return;
 
@@ -45,6 +60,13 @@
 		channel.on('new_request', addNewRequest);
 		channel.on('new_friend', newFriend);
 		channel.on('remove_request', removeRequest);
+	});
+
+	messagesChannel.subscribe((channel) => {
+		if (!channel) return;
+
+		channel.off('new_message', addNewMessage);
+		channel.on('new_message', addNewMessage);
 	});
 
 	const fetchUser = async () => {

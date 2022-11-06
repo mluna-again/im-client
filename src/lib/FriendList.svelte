@@ -40,6 +40,9 @@
 								<span class="message"
 									>{friend.last_message || `say hi to ${friend.username}`}</span
 								>
+								{#if friend.pending_messages_count > 0}
+									<span class="pending">{friend.pending_messages_count}</span>
+								{/if}
 							</li>
 						</button>
 					</Link>
@@ -117,5 +120,16 @@
 		border: none;
 		font-family: 'Poor Story', cursive;
 		font-size: 1.5rem;
+	}
+
+	.pending {
+		position: absolute;
+		top: 0;
+		right: 8%;
+		background-color: #cc0102;
+		font-size: 1.2rem;
+		padding: 3px;
+		transform: skew(-10deg);
+		border: 3px solid white;
 	}
 </style>
