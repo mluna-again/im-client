@@ -2,6 +2,7 @@
 	import { Link } from 'svelte-routing';
 	import { fly } from 'svelte/transition';
 	import NoFriends from './NoFriends.svelte';
+	import MessageDateLabel from './MessageDateLabel.svelte';
 
 	export let user;
 
@@ -28,6 +29,10 @@
 					<Link to="/app/{friend.username}">
 						<button>
 							<li class="friend">
+								<div class="date">
+									<MessageDateLabel date={friend.friends_since} />
+								</div>
+
 								<div class="imgContainer">
 									<img src={friend.avatar} alt="{friend.username} icon" />
 								</div>
@@ -90,6 +95,14 @@
 		margin: 2rem 0;
 		align-items: center;
 		cursor: pointer;
+		position: relative;
+	}
+
+	.date {
+		position: absolute;
+		top: -10px;
+		left: 5%;
+		z-index: 10;
 	}
 
 	.message {
