@@ -103,7 +103,7 @@
 		flex-direction: column;
 		align-items: center;
 		padding-top: 3rem;
-		z-index: 10;
+		z-index: 15;
 		overflow: scroll;
 		scrollbar-width: none;
 	}
