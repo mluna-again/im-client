@@ -21,7 +21,7 @@
 		<NoFriends />
 	{:else}
 		<ul>
-			{#each usersWithAvatar as friend, index}
+			{#each usersWithAvatar as friend, index (friend.id)}
 				<div
 					in:fly={{ y: 50, duration: 300, delay: 300 + index * 50 }}
 					out:fly={{ y: 50, duration: 300, delay: index * 50 }}
@@ -37,7 +37,9 @@
 									<img src={friend.avatar} alt="{friend.username} icon" />
 								</div>
 
-								<span class="message">say hi to {friend.username}</span>
+								<span class="message"
+									>{friend.last_message || `say hi to ${friend.username}`}</span
+								>
 							</li>
 						</button>
 					</Link>

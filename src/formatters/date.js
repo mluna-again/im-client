@@ -1,11 +1,11 @@
 const DAYS_SHORT_NAMES = {
+	0: 'SU',
 	1: 'MO',
-	2: 'TH',
+	2: 'TU',
 	3: 'WE',
 	4: 'TH',
 	5: 'FR',
 	6: 'SA',
-	7: 'SU',
 };
 
 /**
@@ -20,9 +20,9 @@ const DAYS_SHORT_NAMES = {
 export const messageDate = (date) => {
 	const actualDate = new Date(date);
 
-	const day = actualDate.getDay();
+	const day = actualDate.getDate();
 	const month = actualDate.getMonth() + 1;
-	const dayName = DAYS_SHORT_NAMES[day];
+	const dayName = DAYS_SHORT_NAMES[actualDate.getDay()];
 
 	return [String(day), String(month), dayName];
 };

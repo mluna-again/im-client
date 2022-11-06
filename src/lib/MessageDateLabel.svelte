@@ -4,15 +4,17 @@
 	export let date;
 
 	$: [day, month, dayName] = messageDate(date);
-	$: saturday = dayName.toLowerCase() === 'sa';
-	$: sunday = dayName.toLowerCase() === 'su';
+	$: saturday = dayName?.toLowerCase() === 'sa';
+	$: sunday = dayName?.toLowerCase() === 'su';
 </script>
 
-<div>
-	<span class="day">{day}</span>
-	<span class="month">{month}</span>
-	<span class="day-name" class:saturday class:sunday>{dayName}</span>
-</div>
+{#if date}
+	<div>
+		<span class="day">{day}</span>
+		<span class="month">{month}</span>
+		<span class="day-name" class:saturday class:sunday>{dayName}</span>
+	</div>
+{/if}
 
 <style>
 	div {
