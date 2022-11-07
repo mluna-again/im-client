@@ -8,7 +8,7 @@ export const ICONS = {
 	kawakami: 'Kawakami',
 	makoto: 'Makoto',
 	morgana: 'Morgana',
-	ohya: 'Ohya',
+	takemi: 'Takemi',
 	ryuji: 'Ryuji',
 	sae: 'Sae',
 	sojiro: 'Sojiro',
