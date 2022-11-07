@@ -6,6 +6,7 @@
 	import Login from './routes/Login.svelte';
 	import Room from './routes/Room.svelte';
 	import ChatApp from './routes/ChatApp.svelte';
+	import Settings from './routes/Settings.svelte';
 	import NoConnectionMessage from './lib/NoConnectionMessage.svelte';
 	import {
 		disconnectSocket as disconnectMessagesSocket,
@@ -60,6 +61,7 @@
 	{/if}
 	<Router>
 		<Route path="/"><Home /></Route>
+		<Route path="/settings"><Settings /></Route>
 		<Route path="/app"><ChatApp /></Route>
 		<Route path="/app/:friend" let:params
 			><Room username={params.friend} /></Route

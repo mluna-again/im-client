@@ -86,7 +86,11 @@
 </script>
 
 {#if user}
-	<div class="container">
+	<div
+		class="container"
+		in:fly={{ y: 300, duration: 300, delay: 200 }}
+		out:fly={{ y: 300, duration: 300 }}
+	>
 		<div
 			class="phone"
 			in:fly={{ y: 200, duration: 300 }}
