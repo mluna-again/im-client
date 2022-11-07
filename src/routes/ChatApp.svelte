@@ -102,7 +102,10 @@
 			<div class="header">
 				<div class="user">
 					<FriendRequests {user} />
-					<h1 class="username">{user.username}</h1>
+					<button on:click={() => navigate('/settings')} title="Go to Settings">
+						<img src="/icons/{user.icon}.png" alt={user.username} />
+						<h1 class="username">{user.username}</h1>
+					</button>
 				</div>
 
 				<FriendSearcher {user} />
@@ -163,6 +166,24 @@
 	.header .user {
 		display: flex;
 		align-items: center;
+	}
+
+	.header button {
+		background: none;
+		border: none;
+		font-family: 'Earwig Factory', cursive;
+		display: flex;
+		align-items: center;
+		cursor: pointer;
+	}
+
+	.header img {
+		height: 50px;
+		width: 50px;
+		background-color: black;
+		border: 4px solid white;
+		transform: skew(10deg);
+		margin-right: 10px;
 	}
 
 	.header h1 {
