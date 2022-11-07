@@ -22,7 +22,11 @@
 						<button>
 							<li class="friend">
 								<div class="date">
-									<MessageDateLabel date={friend.friends_since || new Date()} />
+									<MessageDateLabel
+										date={friend.last_message_date ||
+											friend.friends_since ||
+											new Date()}
+									/>
 								</div>
 
 								<div class="imgContainer">
