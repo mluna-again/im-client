@@ -3,8 +3,14 @@
 	import { ICONS } from '../icons.js';
 	import GoBack from '../lib/GoBack.svelte';
 	import { user } from '../store.js';
+	import { updateUser } from '../http/user.js';
 
-	const setIconHandler = () => {};
+	const setIconHandler = async (icon) => {
+		await updateUser($user, { icon });
+		user.update((user) => {
+			return { ...user, icon };
+		});
+	};
 </script>
 
 <div
@@ -19,7 +25,7 @@
 		<ul>
 			{#each Object.entries(ICONS) as [name, displayName]}
 				<li class:selected={$user?.icon === name}>
-					<button on:click={setIconHandler}>
+					<button on:click={() => setIconHandler(name)}>
 						<img src="/icons/{name}.png" alt={displayName} />
 						<span>{displayName}</span>
 					</button>
