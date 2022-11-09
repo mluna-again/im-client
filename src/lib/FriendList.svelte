@@ -3,6 +3,7 @@
 	import { fly } from 'svelte/transition';
 	import NoFriends from './NoFriends.svelte';
 	import MessageDateLabel from './MessageDateLabel.svelte';
+	import TypingIndicator from './TypingIndicator.svelte';
 	import { ICONS } from '../icons.js';
 
 	export let user;
@@ -41,6 +42,11 @@
 								>
 								{#if friend.pending_messages_count > 0}
 									<span class="pending">{friend.pending_messages_count}</span>
+								{/if}
+								{#if friend.typing}
+									<div class="typing">
+										<TypingIndicator />
+									</div>
 								{/if}
 							</li>
 						</button>
@@ -130,5 +136,12 @@
 		padding: 3px;
 		transform: skew(-10deg);
 		border: 3px solid white;
+	}
+
+	.typing {
+		position: absolute;
+		top: 50%;
+		right: 15%;
+		transform: translateY(-50%);
 	}
 </style>

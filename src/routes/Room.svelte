@@ -1,4 +1,5 @@
 <script>
+	import { onDestroy } from 'svelte';
 	import { fly } from 'svelte/transition';
 	import GoBack from '../lib/GoBack.svelte';
 	import Message from '../lib/Message.svelte';
@@ -89,6 +90,12 @@
 		channel.off('stop_typing', stopTyping);
 		channel.on('stop_typing', stopTyping);
 	});
+
+	onDestroy(() => {
+		$messagesChannel.off('new_message');
+		$messagesChannel.off('typing');
+		$messagesChannel.off('stop_typing');
+	});
 </script>
 
 <div class="wrapper" in:fly={{ y: 300, duration: 300, delay: 500 }}>
@@ -96,9 +103,9 @@
 
 	<div class="container">
 		<h1>{username}</h1>
-    {#if friend?.typing}
-      <h3>typing...</h3>
-    {/if}
+		{#if friend?.typing}
+			<h3>typing...</h3>
+		{/if}
 
 		<div class="messages">
 			<ul id="messages-list">
@@ -139,10 +146,10 @@
 		font-size: 4rem;
 	}
 
-  h3 {
-    margin-top: 1.5rem;
+	h3 {
+		margin-top: 1.5rem;
 		text-align: center;
-  }
+	}
 
 	.messages {
 		height: 100%;

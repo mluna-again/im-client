@@ -50,6 +50,22 @@
 		};
 	};
 
+	const startTyping = ({ from: fromId }) => {
+		const friends = user.friends.map((friend) => {
+			if (friend.id != fromId) return friend;
+			return { ...friend, typing: true };
+		});
+		user = { ...user, friends };
+	};
+
+	const stopTyping = ({ from: fromId }) => {
+		const friends = user.friends.map((friend) => {
+			if (friend.id != fromId) return friend;
+			return { ...friend, typing: false };
+		});
+		user = { ...user, friends };
+	};
+
 	requestsChannel.subscribe((channel) => {
 		if (!channel) return;
 
@@ -67,6 +83,10 @@
 
 		channel.off('new_message', addNewMessage);
 		channel.on('new_message', addNewMessage);
+		channel.off('typing', startTyping);
+		channel.on('typing', startTyping);
+		channel.off('stop_typing', stopTyping);
+		channel.on('stop_typing', stopTyping);
 	});
 
 	const fetchUser = async () => {
