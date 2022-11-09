@@ -5,7 +5,7 @@ export const ICONS = {
 	futaba: 'Futaba',
 	haru: 'Haru',
 	hifumi: 'Hifumi',
-  kasumi: 'Kasumi',
+	kasumi: 'Kasumi',
 	kawakami: 'Kawakami',
 	makoto: 'Makoto',
 	morgana: 'Morgana',

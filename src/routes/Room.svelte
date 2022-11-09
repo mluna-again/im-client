@@ -56,15 +56,38 @@
 	const addNewMessage = (message) => {
 		messages = [...messages, message];
 		currentMessage = '';
+		friend = { ...friend, typing: false };
 
 		setTimeout(scrollMessages, 100); // this makes me sad again
 	};
 
+	const changeMessageHandler = (value) => {
+		currentMessage = value;
+		$messagesChannel?.push('typing', { to: friend.id });
+	};
+
+	const startTyping = ({ from: fromId }) => {
+		if (fromId != friend.id) return;
+
+		friend = { ...friend, typing: true };
+	};
+
+	const stopTyping = ({ from: fromId }) => {
+		if (fromId != friend.id) return;
+
+		friend = { ...friend, typing: false };
+	};
+
+	// CHANNEL EVENTS
 	messagesChannel.subscribe((channel) => {
 		if (!channel) return;
 
 		channel.off('new_message', addNewMessage);
 		channel.on('new_message', addNewMessage);
+		channel.off('typing', startTyping);
+		channel.on('typing', startTyping);
+		channel.off('stop_typing', stopTyping);
+		channel.on('stop_typing', stopTyping);
 	});
 </script>
 
@@ -73,6 +96,9 @@
 
 	<div class="container">
 		<h1>{username}</h1>
+    {#if friend?.typing}
+      <h3>typing...</h3>
+    {/if}
 
 		<div class="messages">
 			<ul id="messages-list">
@@ -88,11 +114,7 @@
 		</div>
 
 		<form on:submit|preventDefault={sendMessageHandler} class="form">
-			<Input
-				value={currentMessage}
-				onChange={(value) => (currentMessage = value)}
-				noMotion
-			/>
+			<Input value={currentMessage} onChange={changeMessageHandler} noMotion />
 			<div class="submit-btn">
 				<Button message="send" size="sm" />
 			</div>
@@ -116,6 +138,11 @@
 		text-align: center;
 		font-size: 4rem;
 	}
+
+  h3 {
+    margin-top: 1.5rem;
+		text-align: center;
+  }
 
 	.messages {
 		height: 100%;
