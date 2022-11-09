@@ -31,6 +31,9 @@
 								</div>
 
 								<div class="imgContainer">
+									{#if friend.online}
+										<div class="online" />
+									{/if}
 									<img
 										src={`/icons/${friend.icon}.png`}
 										alt="{friend.username} icon"
@@ -98,6 +101,19 @@
 		height: 58px;
 		transform: skew(5deg);
 		z-index: 3;
+		position: relative;
+	}
+
+	.imgContainer .online {
+		position: absolute;
+		top: 0;
+		left: 0;
+		height: 20px;
+		width: 20px;
+		background-color: #41c90d;
+		z-index: 30;
+		border: 3px solid white;
+		border-radius: 100%;
 	}
 
 	.friend {

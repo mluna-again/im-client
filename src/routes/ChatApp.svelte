@@ -66,6 +66,16 @@
 		user = { ...user, friends };
 	};
 
+	const updateUserStatus = ({ user_id, status }) => {
+		const friends = user.friends.map((friend) => {
+			if (friend.id != user_id) return friend;
+
+			return { ...friend, online: status === 'online' };
+		});
+
+		user = { ...user, friends };
+	};
+
 	requestsChannel.subscribe((channel) => {
 		if (!channel) return;
 
@@ -87,6 +97,8 @@
 		channel.on('typing', startTyping);
 		channel.off('stop_typing', stopTyping);
 		channel.on('stop_typing', stopTyping);
+		channel.off('user_status', updateUserStatus);
+		channel.on('user_status', updateUserStatus);
 	});
 
 	const fetchUser = async () => {
