@@ -10,7 +10,7 @@ COPY package*.json ./
 ENV VITE_SERVER_URL=${SERVER}
 ENV VITE_SERVER_WS=${WEBSOCKET}
 
-RUN npm install
+RUN yarn
 
 COPY . .
 
