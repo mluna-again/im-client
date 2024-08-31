@@ -42,7 +42,8 @@
 		loading = false;
 
 		if (!response.ok) {
-			error = `server says: ${response.statusText}`;
+			const msg = response.data?.errors?.details || response.statusText || "no";
+			error = `server says: ${msg}`;
 			return;
 		}
 
