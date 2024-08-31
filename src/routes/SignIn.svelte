@@ -42,6 +42,7 @@
 		loading = false;
 
 		if (!response.ok) {
+    console.log(response)
 			const msg = response.data?.errors?.details || response.statusText || "no";
 			error = `server says: ${msg}`;
 			return;
